@@ -33,9 +33,28 @@ Run from this folder:
 | `.venv/bin/python src/validate.py` | Cross-checks every output, writes `results/tables/validation_report.csv` | not measured |
 | `zsh run_all.sh` | All of the above in order | not measured |
 
-`compareProject1.py` reads Project 1's `CS.gml`, `ECE.gml` and `BIOL.gml` from
-`../project1-cpn-exploration/results/gml/` (create them with that project's
-`cpn_analysis.py`) unless `--project1-dir` points elsewhere.
+### compareProject1.py needs Project 1's output
+
+`compareProject1.py` compares Project 1's SIUE `CS.gml`, `ECE.gml` and `BIOL.gml` with the
+`results/graphs/SIUE_*.gml` extractions. Neither set is in the repository (`*.gml` is
+gitignored), so after a fresh clone, create both first. From the repository root:
+
+```sh
+# 1. Project 1 graphs -> project1-cpn-exploration/results/gml/
+#    (needs Project 1's CSVs in project1-cpn-exploration/data/; see its data/README.md)
+cd project1-cpn-exploration
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python src/cpn_analysis.py
+
+# 2. Project 2 extractions, then the comparison
+cd ../project2-cpn-at-scale
+.venv/bin/python src/partB_networkx.py
+.venv/bin/python src/compareProject1.py
+```
+
+If the Project 1 GMLs are somewhere else (for example, Project 1 was run with `RESULTS_DIR`), pass
+`--project1-dir PATH`. The script stops with a message naming the missing files if either
+input is absent.
 
 ### Environment variables
 

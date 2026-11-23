@@ -42,6 +42,14 @@ To keep the files elsewhere, set `DATA_DIR` to their folder.
 
 ## Project 1 graphs (optional)
 
-`src/compareProject1.py` also needs Project 1's SIUE `CS.gml`, `ECE.gml` and `BIOL.gml`. By default
-it reads them from `../project1-cpn-exploration/results/gml/`; run that project's
-`src/cpn_analysis.py` first, or pass `--project1-dir PATH`.
+`src/compareProject1.py` also needs Project 1's SIUE `CS.gml`, `ECE.gml` and `BIOL.gml`. These are
+not in the repository (`*.gml` is gitignored). By default it reads them from
+`../project1-cpn-exploration/results/gml/`, so after a fresh clone, first run, from the
+`project1-cpn-exploration` folder:
+
+```sh
+.venv/bin/python src/cpn_analysis.py
+```
+
+Or pass `--project1-dir PATH`. See "compareProject1.py needs Project 1's output" in
+[../README.md](../README.md) for the full order.

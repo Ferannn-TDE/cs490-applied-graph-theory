@@ -12,9 +12,14 @@ Run from the project2-cpn-at-scale folder:
 
 --project1-dir overrides config.project1Dir, the folder holding CS.gml, ECE.gml
 and BIOL.gml from Project 1.
+
+Neither input is committed (*.gml is gitignored). Create the Project 1 GMLs with
+project1-cpn-exploration/src/cpn_analysis.py and the SIUE extractions with
+src/partB_networkx.py first; the script exits with a message if either is missing.
 """
 import argparse
 import csv
+import sys
 from pathlib import Path
 
 import networkx as nx
@@ -23,19 +28,28 @@ import config
 from cpnCommon import courseDepartments, loadInstitutionGraph
 
 
-def loadProject1Graph(program):
-    path = config.project1Dir / f"{program}.gml"
-    return nx.read_gml(path, label="label") if path.exists() else None
+def checkInputs():
+    """Stop with a clear message (not a traceback) if an input GML is missing."""
+    missing = [f"{p}.gml" for p in config.programOrder if not (config.project1Dir / f"{p}.gml").is_file()]
+    if missing:
+        sys.exit(f"compareProject1.py: Project 1 graph(s) {', '.join(missing)} not found in {config.project1Dir}\n"
+                 "These files are not in the repository (*.gml is gitignored). Create them first, from the\n"
+                 "project1-cpn-exploration folder:\n"
+                 "    .venv/bin/python src/cpn_analysis.py\n"
+                 "or pass --project1-dir PATH to a folder that holds CS.gml, ECE.gml and BIOL.gml.")
+    missing = [f"SIUE_{p}.gml" for p in config.programOrder
+               if not (config.extractedGraphDir / f"SIUE_{p}.gml").is_file()]
+    if missing:
+        sys.exit(f"compareProject1.py: Project 2 extraction(s) {', '.join(missing)} not found in "
+                 f"{config.extractedGraphDir}\nRun .venv/bin/python src/partB_networkx.py first.")
 
 
 def main():
+    checkInputs()
     siue = loadInstitutionGraph("SIUE")
     summaryRows, detailRows = [], []
     for program in config.programOrder:
-        oldGraph = loadProject1Graph(program)
-        if oldGraph is None:
-            summaryRows.append({"program": program, "status": "PENDING - Project 1 GML not found"})
-            continue
+        oldGraph = nx.read_gml(config.project1Dir / f"{program}.gml", label="label")
         newGraph = nx.read_gml(config.extractedGraphDir / f"SIUE_{program}.gml", label="label")
         oldNodes, newNodes = set(oldGraph), set(newGraph)
         oldEdges, newEdges = set(oldGraph.edges()), set(newGraph.edges())

@@ -89,7 +89,7 @@ def startGephi():
                    "--add-opens=java.base/java.net=ALL-UNNAMED", classpath=jars)
 
 
-class GephiEngine:
+class GephiSession:
     """Thin wrapper around the Gephi controllers we need."""
 
     def __init__(self):
@@ -293,7 +293,7 @@ def layoutExtent(graphModel):
     return max(max(xs) - min(xs), max(ys) - min(ys), 1.0)
 
 
-def applyAppearance(engine, workspace, graphModel, partitionColumn, colorOfGroup,
+def applyAppearance(session, workspace, graphModel, partitionColumn, colorOfGroup,
                     sizeColumn="betweenesscentrality", minFraction=0.002, maxFraction=0.025,
                     absoluteSizes=None):
     """Gephi Appearance: Ranking -> node size by betweenness; Partition -> node colour.
@@ -306,14 +306,14 @@ def applyAppearance(engine, workspace, graphModel, partitionColumn, colorOfGroup
         extent = layoutExtent(graphModel)
         minSize, maxSize = minFraction * extent, maxFraction * extent
     from org.gephi.appearance.plugin import RankingNodeSizeTransformer, PartitionElementColorTransformer
-    model = engine.appearanceController.getModel(workspace)
+    model = session.appearanceController.getModel(workspace)
     table = graphModel.getNodeTable()
     # Size by betweenness (Gephi's column id keeps Gephi's own spelling "betweenesscentrality")
     sizeFunction = model.getNodeFunction(table.getColumn(sizeColumn), RankingNodeSizeTransformer)
     transformer = sizeFunction.getTransformer()
     transformer.setMinSize(float(minSize))
     transformer.setMaxSize(float(maxSize))
-    engine.appearanceController.transform(sizeFunction)
+    session.appearanceController.transform(sizeFunction)
     # Colour by partition
     column = table.getColumn(partitionColumn)
     partition = model.getNodePartition(column)
@@ -321,10 +321,10 @@ def applyAppearance(engine, workspace, graphModel, partitionColumn, colorOfGroup
     for value in partition.getValues(graph):
         partition.setColor(value, hexToColor(colorOfGroup(str(value))))
     colorFunction = model.getNodeFunction(column, PartitionElementColorTransformer)
-    engine.appearanceController.transform(colorFunction)
+    session.appearanceController.transform(colorFunction)
 
 
-def exportPdf(engine, workspace, pdfPath, showLabels=False, labelSize=4):
+def exportPdf(session, workspace, pdfPath, showLabels=False, labelSize=4):
     """Preview settings + Gephi's PDF exporter."""
     from java.awt import Color, Font
     from java.lang import Boolean, Float
@@ -332,7 +332,7 @@ def exportPdf(engine, workspace, pdfPath, showLabels=False, labelSize=4):
     from org.gephi.preview.api import PreviewProperty
     from org.gephi.preview.types import EdgeColor
     from org.gephi.io.exporter.preview import PDFExporter
-    props = engine.previewController.getModel(workspace).getProperties()
+    props = session.previewController.getModel(workspace).getProperties()
     props.putValue(PreviewProperty.SHOW_NODE_LABELS, Boolean(showLabels))
     props.putValue(PreviewProperty.NODE_LABEL_FONT, Font("Arial", Font.PLAIN, labelSize))
     props.putValue(PreviewProperty.NODE_LABEL_PROPORTIONAL_SIZE, Boolean(False))
@@ -342,14 +342,14 @@ def exportPdf(engine, workspace, pdfPath, showLabels=False, labelSize=4):
     props.putValue(PreviewProperty.EDGE_OPACITY, Float(35.0 if not showLabels else 70.0))
     props.putValue(PreviewProperty.EDGE_COLOR, EdgeColor(Color(150, 150, 150)))
     props.putValue(PreviewProperty.ARROW_SIZE, Float(2.0 if not showLabels else 4.0))
-    engine.previewController.refreshPreview(workspace)
+    session.previewController.refreshPreview(workspace)
     exporter = PDFExporter()
     exporter.setWorkspace(workspace)
     pdfPath.parent.mkdir(parents=True, exist_ok=True)
-    engine.exportController.exportFile(File(str(pdfPath)), exporter)
+    session.exportController.exportFile(File(str(pdfPath)), exporter)
 
 
-def exportNodeTable(engine, workspace, csvPath):
+def exportNodeTable(session, workspace, csvPath):
     """Gephi spreadsheet exporter = Data Laboratory 'Export table' for the node table."""
     from java.io import File
     from org.gephi.io.exporter.plugin import ExporterSpreadsheet
@@ -358,7 +358,7 @@ def exportNodeTable(engine, workspace, csvPath):
     exporter.setTableToExport(ExporterSpreadsheet.ExportTable.NODES)
     exporter.setFieldDelimiter(",")
     csvPath.parent.mkdir(parents=True, exist_ok=True)
-    engine.exportController.exportFile(File(str(csvPath)), exporter)
+    session.exportController.exportFile(File(str(csvPath)), exporter)
 
 
 def topGroupColorMap(labels, groupOfLabel, k=8):
@@ -395,7 +395,7 @@ def writeCsv(path, rows, fieldNames=None):
 # ---------------------------------------------------------------------------
 # Part A: institutional graphs
 # ---------------------------------------------------------------------------
-def runPartA(engine):
+def runPartA(session):
     from java.lang import Integer
     from org.gephi.statistics.plugin import Modularity
     statRows, layoutRows, modularityRows, communityRows, componentRows = [], [], [], [], []
@@ -404,14 +404,14 @@ def runPartA(engine):
         t0 = time.time()
         gmlPath = config.inputDir / fileName
         reportDir = config.statisticsDir / "institutions" / inst
-        engine.newProject()
+        session.newProject()
 
         # ---- Workspace 1: full graph, ForceAtlas2 ------------------------------
-        ws1, gm1 = engine.importDirected(gmlPath, f"{inst} full - ForceAtlas2")
+        ws1, gm1 = session.importDirected(gmlPath, f"{inst} full - ForceAtlas2")
         stats = runCentralityStatistics(gm1, reportDir, f"{inst}_full")
         stats.update({"institution": inst, "graph": "full"})
         statRows.append(stats)
-        exportNodeTable(engine, ws1, config.gephiTablesDir / "institutions" / f"{inst}_gephi_nodes.csv")
+        exportNodeTable(session, ws1, config.gephiTablesDir / "institutions" / f"{inst}_gephi_nodes.csv")
 
         # Weak component composition from Gephi's componentnumber column
         compCol = gm1.getNodeTable().getColumn("componentnumber")
@@ -433,9 +433,9 @@ def runPartA(engine):
         groupOf = lambda l: deptOf[l] if deptOf[l] in deptColors else "Other"
         addColorGroupColumn(gm1, "deptColorGroup", groupOf)
         runForceAtlas2(gm1)
-        applyAppearance(engine, ws1, gm1, "deptColorGroup", lambda g: deptColors.get(g, otherHex),
+        applyAppearance(session, ws1, gm1, "deptColorGroup", lambda g: deptColors.get(g, otherHex),
                         minFraction=0.0015, maxFraction=0.02)
-        exportPdf(engine, ws1, config.gephiFigureDir / "institutions" / f"{inst}_full_ForceAtlas2.pdf")
+        exportPdf(session, ws1, config.gephiFigureDir / "institutions" / f"{inst}_full_ForceAtlas2.pdf")
         layoutRows.append({"institution": inst, "graph": "full", "workspace": f"{inst} full - ForceAtlas2",
                            "settings": json.dumps(forceAtlas2Settings),
                            "colouring": "Partition by attr1: 8 largest departments " +
@@ -443,20 +443,20 @@ def runPartA(engine):
                            "nodeSize": "Ranking by betweenesscentrality, 0.15%-2% of layout width"})
 
         # ---- Workspace 2: full graph, Yifan Hu --------------------------------
-        ws2, gm2 = engine.importDirected(gmlPath, f"{inst} full - Yifan Hu")
+        ws2, gm2 = session.importDirected(gmlPath, f"{inst} full - Yifan Hu")
         runCentralityStatistics(gm2, reportDir / "yifanhu_workspace", f"{inst}_full")
         addColorGroupColumn(gm2, "deptColorGroup", groupOf)
         iterations = runYifanHu(gm2)
-        applyAppearance(engine, ws2, gm2, "deptColorGroup", lambda g: deptColors.get(g, otherHex),
+        applyAppearance(session, ws2, gm2, "deptColorGroup", lambda g: deptColors.get(g, otherHex),
                         minFraction=0.0015, maxFraction=0.02)
-        exportPdf(engine, ws2, config.gephiFigureDir / "institutions" / f"{inst}_full_YifanHu.pdf")
+        exportPdf(session, ws2, config.gephiFigureDir / "institutions" / f"{inst}_full_YifanHu.pdf")
         layoutRows.append({"institution": inst, "graph": "full", "workspace": f"{inst} full - Yifan Hu",
                            "settings": json.dumps({**yifanHuSettings, "iterationsRun": iterations}),
                            "colouring": "same department partition as ForceAtlas2",
                            "nodeSize": "Ranking by betweenesscentrality, 0.15%-2% of layout width"})
 
         # ---- Workspace 3: largest weakly connected component + modularity --------
-        ws3, gm3 = engine.importDirected(gmlPath, f"{inst} LCC - modularity")
+        ws3, gm3 = session.importDirected(gmlPath, f"{inst} LCC - modularity")
         from org.gephi.statistics.plugin import ConnectedComponents
         cc = ConnectedComponents()
         cc.setDirected(True)
@@ -557,19 +557,19 @@ def runPartA(engine):
             addColorGroupColumn(gm3, groupCol, lambda l, top=topComms, commOf=commOf:
                                 f"C{commOf[l]}" if commOf[l] in top else "Other")
             colorMap = {f"C{c}": paletteHex[i] for i, c in enumerate(topComms)}
-            applyAppearance(engine, ws3, gm3, groupCol, lambda g: colorMap.get(g, otherHex),
+            applyAppearance(session, ws3, gm3, groupCol, lambda g: colorMap.get(g, otherHex),
                             minFraction=0.002, maxFraction=0.02)
-            exportPdf(engine, ws3, config.gephiFigureDir / "institutions" /
+            exportPdf(session, ws3, config.gephiFigureDir / "institutions" /
                       f"{inst}_LCC_ForceAtlas2_modularity_res{resolution}.pdf")
         layoutRows.append({"institution": inst, "graph": "largest weak component",
                            "workspace": f"{inst} LCC - modularity",
                            "settings": json.dumps(lccForceAtlas2Settings),
                            "colouring": "Partition by each resolution's 8 largest communities; others gray",
                            "nodeSize": "Ranking by betweenesscentrality (LCC), 0.2%-2% of layout width"})
-        exportNodeTable(engine, ws3, config.gephiTablesDir / "institutions" / f"{inst}_LCC_gephi_nodes_modularity.csv")
+        exportNodeTable(session, ws3, config.gephiTablesDir / "institutions" / f"{inst}_LCC_gephi_nodes_modularity.csv")
 
-        engine.projectController.openWorkspace(ws1)
-        engine.saveProject(config.gephiProjectDir / "institutions" / f"{inst}.gephi")
+        session.projectController.openWorkspace(ws1)
+        session.saveProject(config.gephiProjectDir / "institutions" / f"{inst}.gephi")
         print(f"[Part A] {inst} done in {time.time() - t0:.0f}s")
 
     writeCsv(config.gephiTablesDir / "institution_gephi_statistics.csv", statRows)
@@ -614,7 +614,7 @@ def java_list(items):
 # ---------------------------------------------------------------------------
 # Part C: the 15 program graphs
 # ---------------------------------------------------------------------------
-def runPartC(engine):
+def runPartC(session):
     statRows, layoutRows = [], []
     programColor = dict(zip(config.programOrder, paletteHex[:3]))
     for inst in config.institutionFiles:
@@ -622,10 +622,10 @@ def runPartC(engine):
             gmlPath = config.extractedGraphDir / f"{inst}_{program}.gml"
             name = f"{inst}_{program}"
             reportDir = config.statisticsDir / "programs" / name
-            engine.newProject()
+            session.newProject()
             colorOf = lambda g, p=program: programColor[p] if g == "target" else otherHex
             for layoutName in ("ForceAtlas2", "Yifan Hu"):
-                ws, gm = engine.importDirected(gmlPath, f"{name} - {layoutName}")
+                ws, gm = session.importDirected(gmlPath, f"{name} - {layoutName}")
                 stats = runCentralityStatistics(gm, reportDir if layoutName == "ForceAtlas2"
                                                 else reportDir / "yifanhu_workspace", name)
                 targetCol = gm.getNodeTable().getColumn("isTargetDept")
@@ -633,13 +633,13 @@ def runPartC(engine):
                             for n in gm.getGraph().getNodes().toArray()}
                 addColorGroupColumn(gm, "programRole", lambda l: "target" if isTarget[l] else "prerequisite")
                 # Size by betweenness FIRST so the layout's overlap prevention knows node sizes.
-                applyAppearance(engine, ws, gm, "programRole", colorOf, absoluteSizes=(4.0, 24.0))
+                applyAppearance(session, ws, gm, "programRole", colorOf, absoluteSizes=(4.0, 24.0))
                 if layoutName == "ForceAtlas2":
                     settings = programForceAtlas2Settings
                     runForceAtlas2(gm, settings)
                     stats.update({"institution": inst, "program": program})
                     statRows.append(stats)
-                    exportNodeTable(engine, ws, config.gephiTablesDir / "programs" / f"{name}_gephi_nodes.csv")
+                    exportNodeTable(session, ws, config.gephiTablesDir / "programs" / f"{name}_gephi_nodes.csv")
                 else:
                     # Yifan Hu has no gravity, so isolated courses drift to the page edges and
                     # shrink the connected structure to a dot. In this workspace ONLY, isolated
@@ -653,13 +653,13 @@ def runPartC(engine):
                 tag = "ForceAtlas2" if layoutName == "ForceAtlas2" else "YifanHu_isolatesRemoved"
                 labelSize = max(1, round(layoutExtent(gm) / 110))   # label font scaled to layout size
                 settings["labelFontSize"] = labelSize
-                exportPdf(engine, ws, config.gephiFigureDir / "programs" / f"{name}_{tag}.pdf",
+                exportPdf(session, ws, config.gephiFigureDir / "programs" / f"{name}_{tag}.pdf",
                           showLabels=True, labelSize=labelSize)
                 layoutRows.append({"institution": inst, "program": program, "workspace": f"{name} - {layoutName}",
                                    "settings": json.dumps(settings),
                                    "colouring": f"{program} dept courses {programColor[program]}; prerequisites gray",
                                    "nodeSize": "Ranking by betweenesscentrality, absolute 4-24 (applied before layout)"})
-            engine.saveProject(config.gephiProjectDir / "programs" / f"{name}.gephi")
+            session.saveProject(config.gephiProjectDir / "programs" / f"{name}.gephi")
             print(f"[Part C] {name}: {stats['nodes']} nodes, {stats['edges']} edges")
     writeCsv(config.gephiTablesDir / "program_gephi_statistics.csv", statRows)
     writeCsv(config.gephiTablesDir / "program_layout_settings.csv", layoutRows)
@@ -676,11 +676,11 @@ def main():
     from java.lang import System
     exitCode = 0
     try:
-        engine = GephiEngine()
+        session = GephiSession()
         if runA:
-            runPartA(engine)
+            runPartA(session)
         if runC:
-            runPartC(engine)
+            runPartC(session)
     except Exception:
         import traceback
         traceback.print_exc()
