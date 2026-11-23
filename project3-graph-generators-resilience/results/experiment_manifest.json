@@ -1,0 +1,365 @@
+{
+  "structuralConfigurations": [
+    {
+      "model": "RGG",
+      "n": 10000,
+      "targetDegree": 10,
+      "radius": 0.017841241161527712,
+      "configId": "RGG_n10000_d10",
+      "seed": 598316773
+    },
+    {
+      "model": "ER",
+      "n": 10000,
+      "targetDegree": 10,
+      "probability": 0.001000100010001,
+      "configId": "ER_n10000_d10",
+      "seed": 2136019498
+    },
+    {
+      "model": "WS",
+      "n": 10000,
+      "targetDegree": 10,
+      "k": 10,
+      "probability": 0.1,
+      "configId": "WS_n10000_d10_p0.1",
+      "seed": 1281473457
+    },
+    {
+      "model": "WS",
+      "n": 10000,
+      "targetDegree": 10,
+      "k": 10,
+      "probability": 0.2,
+      "configId": "WS_n10000_d10_p0.2",
+      "seed": 2108876240
+    },
+    {
+      "model": "WS",
+      "n": 10000,
+      "targetDegree": 10,
+      "k": 10,
+      "probability": 0.3,
+      "configId": "WS_n10000_d10_p0.3",
+      "seed": 1530812191
+    },
+    {
+      "model": "BA",
+      "n": 10000,
+      "targetDegree": 10,
+      "m": 5,
+      "configId": "BA_n10000_d10",
+      "seed": 1915862186
+    },
+    {
+      "model": "RGG",
+      "n": 10000,
+      "targetDegree": 20,
+      "radius": 0.025231325220201602,
+      "configId": "RGG_n10000_d20",
+      "seed": 1280909454
+    },
+    {
+      "model": "ER",
+      "n": 10000,
+      "targetDegree": 20,
+      "probability": 0.002000200020002,
+      "configId": "ER_n10000_d20",
+      "seed": 2279778771
+    },
+    {
+      "model": "WS",
+      "n": 10000,
+      "targetDegree": 20,
+      "k": 20,
+      "probability": 0.1,
+      "configId": "WS_n10000_d20_p0.1",
+      "seed": 801221649
+    },
+    {
+      "model": "WS",
+      "n": 10000,
+      "targetDegree": 20,
+      "k": 20,
+      "probability": 0.2,
+      "configId": "WS_n10000_d20_p0.2",
+      "seed": 2747404062
+    },
+    {
+      "model": "WS",
+      "n": 10000,
+      "targetDegree": 20,
+      "k": 20,
+      "probability": 0.3,
+      "configId": "WS_n10000_d20_p0.3",
+      "seed": 1655276307
+    },
+    {
+      "model": "BA",
+      "n": 10000,
+      "targetDegree": 20,
+      "m": 10,
+      "configId": "BA_n10000_d20",
+      "seed": 610972746
+    },
+    {
+      "model": "RGG",
+      "n": 20000,
+      "targetDegree": 10,
+      "radius": 0.012615662610100801,
+      "configId": "RGG_n20000_d10",
+      "seed": 3116044707
+    },
+    {
+      "model": "ER",
+      "n": 20000,
+      "targetDegree": 10,
+      "probability": 0.0005000250012500625,
+      "configId": "ER_n20000_d10",
+      "seed": 315420166
+    },
+    {
+      "model": "WS",
+      "n": 20000,
+      "targetDegree": 10,
+      "k": 10,
+      "probability": 0.1,
+      "configId": "WS_n20000_d10_p0.1",
+      "seed": 1151593419
+    },
+    {
+      "model": "WS",
+      "n": 20000,
+      "targetDegree": 10,
+      "k": 10,
+      "probability": 0.2,
+      "configId": "WS_n20000_d10_p0.2",
+      "seed": 2459135922
+    },
+    {
+      "model": "WS",
+      "n": 20000,
+      "targetDegree": 10,
+      "k": 10,
+      "probability": 0.3,
+      "configId": "WS_n20000_d10_p0.3",
+      "seed": 3128737299
+    },
+    {
+      "model": "BA",
+      "n": 20000,
+      "targetDegree": 10,
+      "m": 5,
+      "configId": "BA_n20000_d10",
+      "seed": 764421558
+    },
+    {
+      "model": "RGG",
+      "n": 20000,
+      "targetDegree": 20,
+      "radius": 0.017841241161527712,
+      "configId": "RGG_n20000_d20",
+      "seed": 378355309
+    },
+    {
+      "model": "ER",
+      "n": 20000,
+      "targetDegree": 20,
+      "probability": 0.001000050002500125,
+      "configId": "ER_n20000_d20",
+      "seed": 3132801019
+    },
+    {
+      "model": "WS",
+      "n": 20000,
+      "targetDegree": 20,
+      "k": 20,
+      "probability": 0.1,
+      "configId": "WS_n20000_d20_p0.1",
+      "seed": 2563701656
+    },
+    {
+      "model": "WS",
+      "n": 20000,
+      "targetDegree": 20,
+      "k": 20,
+      "probability": 0.2,
+      "configId": "WS_n20000_d20_p0.2",
+      "seed": 3957770943
+    },
+    {
+      "model": "WS",
+      "n": 20000,
+      "targetDegree": 20,
+      "k": 20,
+      "probability": 0.3,
+      "configId": "WS_n20000_d20_p0.3",
+      "seed": 147205844
+    },
+    {
+      "model": "BA",
+      "n": 20000,
+      "targetDegree": 20,
+      "m": 10,
+      "configId": "BA_n20000_d20",
+      "seed": 4121008077
+    },
+    {
+      "model": "RGG",
+      "n": 50000,
+      "targetDegree": 10,
+      "radius": 0.007978845608028654,
+      "configId": "RGG_n50000_d10",
+      "seed": 3618623529
+    },
+    {
+      "model": "ER",
+      "n": 50000,
+      "targetDegree": 10,
+      "probability": 0.0002000040000800016,
+      "configId": "ER_n50000_d10",
+      "seed": 1591457379
+    },
+    {
+      "model": "WS",
+      "n": 50000,
+      "targetDegree": 10,
+      "k": 10,
+      "probability": 0.1,
+      "configId": "WS_n50000_d10_p0.1",
+      "seed": 1807562907
+    },
+    {
+      "model": "WS",
+      "n": 50000,
+      "targetDegree": 10,
+      "k": 10,
+      "probability": 0.2,
+      "configId": "WS_n50000_d10_p0.2",
+      "seed": 1717520671
+    },
+    {
+      "model": "WS",
+      "n": 50000,
+      "targetDegree": 10,
+      "k": 10,
+      "probability": 0.3,
+      "configId": "WS_n50000_d10_p0.3",
+      "seed": 4216182681
+    },
+    {
+      "model": "BA",
+      "n": 50000,
+      "targetDegree": 10,
+      "m": 5,
+      "configId": "BA_n50000_d10",
+      "seed": 2163485448
+    },
+    {
+      "model": "RGG",
+      "n": 50000,
+      "targetDegree": 20,
+      "radius": 0.011283791670955126,
+      "configId": "RGG_n50000_d20",
+      "seed": 3204025996
+    },
+    {
+      "model": "ER",
+      "n": 50000,
+      "targetDegree": 20,
+      "probability": 0.0004000080001600032,
+      "configId": "ER_n50000_d20",
+      "seed": 2606816153
+    },
+    {
+      "model": "WS",
+      "n": 50000,
+      "targetDegree": 20,
+      "k": 20,
+      "probability": 0.1,
+      "configId": "WS_n50000_d20_p0.1",
+      "seed": 1373731586
+    },
+    {
+      "model": "WS",
+      "n": 50000,
+      "targetDegree": 20,
+      "k": 20,
+      "probability": 0.2,
+      "configId": "WS_n50000_d20_p0.2",
+      "seed": 3974584944
+    },
+    {
+      "model": "WS",
+      "n": 50000,
+      "targetDegree": 20,
+      "k": 20,
+      "probability": 0.3,
+      "configId": "WS_n50000_d20_p0.3",
+      "seed": 3929782914
+    },
+    {
+      "model": "BA",
+      "n": 50000,
+      "targetDegree": 20,
+      "m": 10,
+      "configId": "BA_n50000_d20",
+      "seed": 2885065875
+    }
+  ],
+  "resilienceConfigurations": [
+    {
+      "model": "RGG",
+      "n": 500,
+      "targetDegree": 10,
+      "radius": 0.07978845608028654,
+      "configId": "RGG_n500_d10",
+      "seed": 373159880
+    },
+    {
+      "model": "ER",
+      "n": 500,
+      "targetDegree": 10,
+      "probability": 0.02004008016032064,
+      "configId": "ER_n500_d10",
+      "seed": 115719681
+    },
+    {
+      "model": "BA",
+      "n": 500,
+      "targetDegree": 10,
+      "m": 5,
+      "configId": "BA_n500_d10",
+      "seed": 943541719
+    },
+    {
+      "model": "RGG",
+      "n": 500,
+      "targetDegree": 20,
+      "radius": 0.11283791670955126,
+      "configId": "RGG_n500_d20",
+      "seed": 3438503747
+    },
+    {
+      "model": "ER",
+      "n": 500,
+      "targetDegree": 20,
+      "probability": 0.04008016032064128,
+      "configId": "ER_n500_d20",
+      "seed": 508330426
+    },
+    {
+      "model": "BA",
+      "n": 500,
+      "targetDegree": 20,
+      "m": 10,
+      "configId": "BA_n500_d20",
+      "seed": 791547673
+    }
+  ],
+  "randomTrials": 5,
+  "pathSampleSize": 64,
+  "expectedStructuralGraphs": 36,
+  "expectedResilienceGraphs": 6,
+  "expectedAttackRuns": 36
+}

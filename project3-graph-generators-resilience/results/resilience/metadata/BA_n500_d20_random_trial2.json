@@ -1,0 +1,22 @@
+{
+  "config": {
+    "model": "BA",
+    "n": 500,
+    "targetDegree": 20,
+    "m": 10,
+    "configId": "BA_n500_d20",
+    "seed": 791547673
+  },
+  "strategy": "random",
+  "trial": 2,
+  "attackSeed": 2446965073,
+  "schemaVersion": 1,
+  "networkxVersion": "3.4.2",
+  "originalGraph": "BA_n500_d20.gml",
+  "tieRule": "smallest integer node ID among exactly equal maximum scores",
+  "betweenness": "exact; k=None; recomputed after every removal",
+  "complete": true,
+  "records": 501,
+  "selectionSeconds": 0.0025997770208050497,
+  "stateSeconds": 0.04204576103074942
+}

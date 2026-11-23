@@ -1,0 +1,22 @@
+{
+  "config": {
+    "model": "ER",
+    "n": 500,
+    "targetDegree": 20,
+    "probability": 0.04008016032064128,
+    "configId": "ER_n500_d20",
+    "seed": 508330426
+  },
+  "strategy": "random",
+  "trial": 4,
+  "attackSeed": 1756082119,
+  "schemaVersion": 1,
+  "networkxVersion": "3.4.2",
+  "originalGraph": "ER_n500_d20.gml",
+  "tieRule": "smallest integer node ID among exactly equal maximum scores",
+  "betweenness": "exact; k=None; recomputed after every removal",
+  "complete": true,
+  "records": 501,
+  "selectionSeconds": 0.002415888084215112,
+  "stateSeconds": 0.039048624952556565
+}

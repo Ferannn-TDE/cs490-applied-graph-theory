@@ -1,0 +1,22 @@
+{
+  "config": {
+    "model": "RGG",
+    "n": 500,
+    "targetDegree": 20,
+    "radius": 0.11283791670955126,
+    "configId": "RGG_n500_d20",
+    "seed": 3438503747
+  },
+  "strategy": "random",
+  "trial": 4,
+  "attackSeed": 522413517,
+  "schemaVersion": 1,
+  "networkxVersion": "3.4.2",
+  "originalGraph": "RGG_n500_d20.gml",
+  "tieRule": "smallest integer node ID among exactly equal maximum scores",
+  "betweenness": "exact; k=None; recomputed after every removal",
+  "complete": true,
+  "records": 501,
+  "selectionSeconds": 0.002642084946273826,
+  "stateSeconds": 0.06625681693549268
+}
