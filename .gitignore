@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.matplotlib/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+__MACOSX/
+~$*
+.idea/
+.vscode/
+
+# Archives and backups
+*.zip
+*.old.*
+*.bak
+
+# Logs, locks, checkpoints
+*.log
+*.lock
+**/checkpoints/
+
+# Office files, PDFs and fonts
+*.docx
+*.pdf
+*.ttf
+*.otf
+
+# Secrets (defensive)
+.env
+.env.*
+*.pem
+*.key
+
+# Course material and old layout folders (never committed)
+**/*_Submission/
+**/Project3_Minimum_Submission/
+**/P2Graphs/
+**/inputs/
+**/P1_CSVs/
+**/ExtractedGraphs/
+Report/
+**/outputs/structure/graphs/
+**/outputs/gephi/
+**/outputs/plots_previous/
+**/Statistics/
+
+# Graph data: instructor/third-party inputs and regenerable outputs
+*.gml
+*.gephi
+**/data/*
+!**/data/README.md
+
+# Project 1: per-course tables (reproduce the input data course by course)
+project1-cpn-exploration/results/course_metrics.csv
+project1-cpn-exploration/results/topological_strata.csv
+
+# Project 2: per-course/per-node tables, drawings and Gephi outputs
+project2-cpn-at-scale/results/graphs/
+project2-cpn-at-scale/results/gephi/
+project2-cpn-at-scale/results/statistics/
+project2-cpn-at-scale/results/tables/**/*course_metrics*
+project2-cpn-at-scale/results/tables/programs/project1_vs_project2_SIUE_differences.csv
+project2-cpn-at-scale/results/tables/gephi/institutions/
+project2-cpn-at-scale/results/tables/gephi/programs/
+project2-cpn-at-scale/results/tables/validation_report.csv
+project2-cpn-at-scale/results/figures/networkx/layered_*.png
+
+# Project 3: regenerable graphs, Gephi outputs and run status
+project3-graph-generators-resilience/results/structure/graphs/
+project3-graph-generators-resilience/results/resilience/graphs/
+project3-graph-generators-resilience/results/gephi/
+project3-graph-generators-resilience/results/completion_status.json
