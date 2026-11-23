@@ -1,0 +1,5 @@
+institution,program,deptCodes,targetDeptCourses,crossListedTargetCourses,isolatedTargetCourses,prerequisiteOnlyCourses,nodes,edges,weakComponents,largestComponentSize,largestComponentPercent,singletonComponents,intermediateComponents,maxStratum_edges,longestChain_courses,meanReach,maxReach,reachablePairs,avgShortestPathLength,diameterReachable,variant
+MST,ECE,ELECENG,85,17,19,53,138,232,20,119,86.23188405797102,19,0,11,12,12.326086956521738,99,1563,3.0281509916826614,7,sensitivity (not exported)
+MST,ECE,ELECENG+COMPENG,118,22,32,60,178,305,33,146,82.02247191011236,32,0,11,12,11.741573033707866,116,1912,2.937761506276151,7,primary (exported GML)
+SIUC,BIOL,BIOL+ZOOL+PLB+MICR,110,34,24,39,149,269,26,123,82.5503355704698,24,1,10,11,8.644295302013424,70,1139,2.1589113257243198,4,sensitivity (not exported)
+SIUC,BIOL,BIOL,12,0,2,14,26,59,3,24,92.3076923076923,2,0,6,7,6,14,130,1.7,3,primary (exported GML)

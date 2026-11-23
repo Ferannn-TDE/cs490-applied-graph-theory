@@ -1,0 +1,9 @@
+# Python 3.13 (tested with 3.13.5)
+networkx==3.4.2
+numpy==2.1.3
+# NetworkX PageRank needs SciPy. The original run used SciPy 1.15.3; 1.16.3 gives matching results (see README).
+scipy==1.16.3
+matplotlib==3.10.0
+# Only needed for src/gephiPipeline.py (drives the Gephi 0.11.3 jars inside Gephi.app; see GEPHI_HOME)
+JPype1==1.7.1
+packaging

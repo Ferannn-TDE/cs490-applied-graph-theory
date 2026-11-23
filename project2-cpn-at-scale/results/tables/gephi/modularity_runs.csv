@@ -1,0 +1,16 @@
+institution,resolution,randomize,useWeights,timedOutAttemptsBeforeSuccess,edgesTreatedAs,modularityQ,communities,lccNodes,largestCommunity,largestCommunityPercent,communitiesWith10Plus,medianCommunitySize,deptPurity
+SIUE,0.5,False,False,0,undirected (Gephi Modularity uses the undirected view),0.822999047973768,27,883,92,10.419026047565119,26,32,0.7089467723669309
+SIUE,1.0,False,False,0,undirected (Gephi Modularity uses the undirected view),0.8263911853161701,19,883,112,12.684031710079275,18,34,0.5866364665911665
+SIUE,1.5,False,False,0,undirected (Gephi Modularity uses the undirected view),0.8241316459088978,17,883,120,13.590033975084937,16,50,0.5469988674971688
+SIUC,0.5,False,False,0,undirected (Gephi Modularity uses the undirected view),0.8340723160564147,42,1395,100,7.168458781362007,39,27,0.6078853046594982
+SIUC,1.0,False,False,0,undirected (Gephi Modularity uses the undirected view),0.8332245120402235,32,1395,135,9.67741935483871,31,36,0.5362007168458781
+SIUC,1.5,False,False,0,undirected (Gephi Modularity uses the undirected view),0.8303585037511702,23,1395,180,12.903225806451612,23,48,0.4544802867383513
+UIUC,0.5,False,False,0,undirected (Gephi Modularity uses the undirected view),0.7743745273860165,33,1607,99,6.160547604231487,33,49,0.4729309271935283
+UIUC,1.0,False,False,0,undirected (Gephi Modularity uses the undirected view),0.7841459742446798,23,1607,215,13.378967019290604,23,47,0.40261356565028
+UIUC,1.5,False,False,0,undirected (Gephi Modularity uses the undirected view),0.7681513043689379,18,1607,320,19.912881144990667,17,64,0.3403858120721842
+MST,0.5,False,False,0,undirected (Gephi Modularity uses the undirected view),0.7635666278458495,28,1083,88,8.125577100646353,26,36,0.5780240073868883
+MST,1.0,False,False,0,undirected (Gephi Modularity uses the undirected view),0.758708964171611,20,1083,150,13.850415512465373,19,51,0.5069252077562327
+MST,1.5,False,False,0,undirected (Gephi Modularity uses the undirected view),0.7496134986266754,16,1083,237,21.883656509695292,14,38,0.39519852262234534
+UMKC,0.5,False,False,0,undirected (Gephi Modularity uses the undirected view),0.7864266877718343,25,624,89,14.262820512820513,21,23,0.6298076923076923
+UMKC,1.0,False,False,0,undirected (Gephi Modularity uses the undirected view),0.8015708773323724,18,624,89,14.262820512820513,16,26,0.6073717948717948
+UMKC,1.5,False,False,0,undirected (Gephi Modularity uses the undirected view),0.7934742329103062,16,624,89,14.262820512820513,15,29,0.5368589743589743

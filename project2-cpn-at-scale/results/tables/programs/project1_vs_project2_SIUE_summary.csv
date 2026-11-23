@@ -1,0 +1,4 @@
+program,status,project1Nodes,project1Edges,project2Nodes,project2Edges,sharedNodes,sharedEdges,nodesOnlyInProject1,nodesOnlyInProject2,edgesOnlyInProject1,edgesOnlyInProject2,project1EdgesSameDirectionInSIUE,project1EdgesReversedVsProject2,project1OnlyNodesPresentInSIUE,identicalGraphs
+CS,compared,33,49,43,54,33,49,0,10,0,5,49,0,0,False
+ECE,compared,56,86,65,84,52,72,4,13,14,12,72,0,0,False
+BIOL,compared,78,108,110,172,69,91,9,41,17,81,91,0,0,False
